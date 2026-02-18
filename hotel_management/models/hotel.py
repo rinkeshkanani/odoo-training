@@ -61,7 +61,7 @@ class HotelFeature(models.Model):
     _rec_name = 'feature_name'
 
     feature_name = fields.Char(string='Feature Name',required=True)
-
+    feature_type = fields.Char(string='Feature Type',required=True)
 
 
 
