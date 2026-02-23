@@ -1,9 +1,9 @@
 <odoo>
-<!-- ====================== HOTEL CUSTOMER ============================== -->
+    <!-- ====================== HOTEL CUSTOMER ============================== -->
     <!-- List View -->
     <record id="view_hotel_management_list" model="ir.ui.view">
-        <field name="name">hotel_management.hotel_management.list</field>
-        <field name="model">hotel_management.hotel_management</field>
+        <field name="name">hotel.management.list</field>
+        <field name="model">hotel.management</field>
         <field name="arch" type="xml">
             <list>
                 <field name="first_name"/>
@@ -16,33 +16,40 @@
                 <field name="is_assigned"/>
                 <field name="amount"/>
                 <field name="deposit_amount"/>
-                <field name="amount_paid"/>
+                <field name="amount_paid" widget="monetary"/>
+                <field name="is_paid"/>
             </list>
         </field>
     </record>
 
     <!-- Search View -->
+
     <record id="view_hotel_management_search" model="ir.ui.view">
-        <field name="name">hotel_management.hotel_management.search</field>
-        <field name="model">hotel_management.hotel_management</field>
+        <field name="name">hotel.management.search</field>
+        <field name="model">hotel.management</field>
         <field name="arch" type="xml">
-            <search>
-                <field name="first_name"/>
-                <field name="last_name"/>
-                <filter string="Assigned"
-                        name="is_assigned"
-                        domain="[('is_assigned','=',True)]"/>
-                <filter string="Amount Paid"
-                        name="amount_paid"
-                        domain="[('amount_paid','>',18000)]"/>
-            </search>
+        <search>
+            <field name="first_name"/>
+            <field name="last_name"/>
+            <field name="email"/>
+
+            <filter string="Assigned"
+                    name="filter_assigned"
+                    domain="[('is_assigned','=',True)]"/>
+
+            <filter string="Paid"
+                    name="filter_paid"
+                    domain="[('is_paid','=',True)]"/>
+
+        </search>
         </field>
     </record>
 
+
     <!-- Form View -->
     <record id="view_hotel_management_form" model="ir.ui.view">
-        <field name="name">hotel_management.hotel_management.form</field>
-        <field name="model">hotel_management.hotel_management</field>
+        <field name="name">hotel_management.form</field>
+        <field name="model">hotel.management</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
@@ -57,21 +64,23 @@
                         <field name="is_assigned"/>
                         <field name="amount"/>
                         <field name="deposit_amount"/>
-                        <field name="amount_paid"/>
+                        <field name="amount_paid" widget="monetary"/>
+                        <field name="is_paid"/>
                     </group>
 
                     <notebook>
 
                         <!-- Rooms Tab -->
                         <page string="Rooms">
+
                             <field name="room_ids">
-                                <list editable="bottom">
-                                    <field name="room_type"/>
-                                    <field name="feature_ids" widget="many2many_tags"/>
-                                </list>
+                            <list editable="bottom">
+                                <field name="room_type"/>
+                                <field name="room_no"/>
+                                <field name="customer_name" readonly="1"/>
+                            </list>
                             </field>
                         </page>
-
                         <!-- Customer Features Tab -->
                         <page string="Features">
                             <field name="feature_ids">
@@ -91,13 +100,13 @@
     <!-- Action -->
     <record id="action_hotel_management" model="ir.actions.act_window">
         <field name="name">Customers</field>
-        <field name="res_model">hotel_management.hotel_management</field>
+        <field name="res_model">hotel.management</field>
         <field name="view_mode">list,form</field>
         <field name="search_view_id" ref="view_hotel_management_search"/>
     </record>
 
 
-<!-- ====================== HOTEL ROOM ============================== -->
+    <!-- ====================== HOTEL ROOM ============================== -->
 
     <!-- List View -->
     <record id="view_hotel_room_list" model="ir.ui.view">
@@ -137,7 +146,7 @@
     </record>
 
 
-<!-- ====================== HOTEL FEATURE ============================== -->
+    <!-- ====================== HOTEL FEATURE ============================== -->
 
     <!-- List View -->
     <record id="view_hotel_feature_list" model="ir.ui.view">
@@ -159,6 +168,7 @@
                 <sheet>
                     <group>
                         <field name="feature_name"/>
+                        <field name="document"/>
                     </group>
                 </sheet>
             </form>
@@ -173,7 +183,7 @@
     </record>
 
 
-<!-- ====================== MENUS ============================== -->
+    <!-- ====================== MENUS ============================== -->
 
     <menuitem id="menu_hotel_root"
               name="Hotel Management"

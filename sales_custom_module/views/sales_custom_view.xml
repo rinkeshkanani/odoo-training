@@ -1,0 +1,93 @@
+<odoo>
+    <record id="view_sales_custom_from" model = 'ir.ui.view'>
+        <field name="name">sale.order.form.inherit.custom</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <!-- add new field below customer name -->
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="note_to_take"/>
+            </xpath>
+
+            <!--  replace payment term to payment method and also add radio widget      -->
+            <xpath expr="//field[@name='payment_term_id']" position="replace">
+                <field name="payment_method" widget="radio"/>
+            </xpath>
+
+            <!-- priority widget -->
+            <xpath expr="//field[@name='payment_method']" position="after">
+                <field name="cust_priority" widget="priority"/>
+            </xpath>
+
+            <!-- boolean_toggle -->
+            <xpath expr="//field[@name='note_to_take']" position="after">
+                <field name="is_paid" widget='boolean_toggle'/>
+            </xpath>
+
+            <xpath expr="//field[@name='note_to_take']" position="after">
+                <field name="state"/>
+            </xpath>
+
+            <xpath expr="//field[@name='payment_method']" position="after">
+                <field name="amount"/>
+            </xpath>
+
+            <!-- force save  -->
+            <xpath expr="//field[@name='amount']" position="after">
+                <field name="to_be_paid" force_save="1"/>
+            </xpath>
+            <!-- many2many_binary image -->
+            <xpath expr="//field[@name='to_be_paid']" position="after">
+                    <field name="image_field" widget="many2many_binary"/>
+            </xpath>
+
+            <!-- no_create and no_create_edit -->
+<!--            <xpath expr="//field[@name='partner_id']" position="attributes">-->
+<!--               <attribute name="options">{'no_create': True,'no_create_edit':True}</attribute>-->
+<!--            </xpath>-->
+
+            <!-- tab  -->
+            <xpath expr="//notebook" position="inside">
+                <page string="Customer Request">
+                    <group>
+                    <field name ='internal_request'/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+    <!--list view-->
+    <record id="view_sale_custom_list" model="ir.ui.view">
+        <field name="name">sale.order.list</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <!-- column_invisible attribute -->
+                <field name="note_to_take" column_invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+    <!--  inheritance menu  -->
+    <menuitem id="sale.sale_menu_root"
+              name="Custom Sale"/>
+    <!--  inheritance action  -->
+    <record id="sale.action_quotations_with_onboarding" model="ir.actions.act_window">
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+    <!--  search inheritance  -->
+    <record id="view_sale_custom_search" model="ir.ui.view">
+        <field name="name">sale.order.search</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <filter string="Priority 3"
+                    name="priority_3"
+                    domain="[('cust_priority','=','3')]"/>
+    </xpath>
+        </field>
+    </record>
+</odoo>
