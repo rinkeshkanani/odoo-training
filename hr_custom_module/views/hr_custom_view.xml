@@ -1,0 +1,61 @@
+<odoo>
+    <!-- wizard action -->
+    <record id="action_employee_action_wizard" model="ir.actions.act_window">
+        <field name="name">Action</field>
+        <field name="res_model">employee.action.wizard</field>
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+    </record>
+
+
+    <record id="view_hr_employee_form" model="ir.ui.view">
+        <field name="name">hr.employee.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name = 'private_email']" position="inside">
+                <field name="notes"/>
+            </xpath>
+
+            <!-- wizard button -->
+            <xpath expr="//button[@name = '570']" position="after">
+                    <button name="%(hr_custom_module.action_employee_action_wizard)d"
+                            type="action"
+                            string="Action"
+                            class="fa fa-paper-plane-o btn-primary  " aria-hidden="true"/>
+            </xpath>
+            <xpath expr="//header" position="attributes">
+                <attribute name="style">background-color: #9d8acf;</attribute>
+            </xpath>
+            <xpath expr="//sheet" position="attributes">
+                <attribute name="style">
+                    background-color: #6c468a;
+                </attribute>
+            </xpath>
+            <!-- hasclass but not working -->
+<!--            <xpath expr="//div[hasclass('o_notebook')]" position="attributes">-->
+<!--                <attribute name="style">background-color:#c49b9b</attribute>-->
+<!--            </xpath>-->
+        </field>
+    </record>
+
+    <!-- wizard view form -->
+    <record id="view_employee_action_wizard" model="ir.ui.view">
+        <field name="name">employee.action.wizard.form</field>
+        <field name="model">employee.action.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="employee_action"/>
+                </group>
+                <footer>
+                    <button name="create_action_wizard"
+                            type="object"
+                            string="Send"
+                            class="btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>
