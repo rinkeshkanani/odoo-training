@@ -4,39 +4,61 @@
         <field name="name">library.member.form</field>
         <field name="model">library.member</field>
         <field name="arch" type="xml">
-        <form>
-            <sheet>
-                <group>
-                    <field name="name" />
-                    <field name="email" />
-                    <field name="phone" />
-                    <field name="borrow_count"/>
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <!-- smart borrow btn -->
+                    <div name="button_box" class="oe_button_box">
+                    <button name="compute_borrow_count"
+                            string="Borrow"
+                            type="object"
+                            icon="fa-book">
+                        <field name="borrow_count"/>
+                    </button>
+                    </div>
+                    <group>
+                        <field name="name"/>
+                        <field name="email"/>
+                        <field name="phone"/>
 
-                </group>
-            </sheet>
-        </form>
+                    </group>
+                </sheet>
+            </form>
         </field>
     </record>
 
     <!--  member model form list  -->
     <record id="view_library_member_list" model="ir.ui.view">
-    <field name="name">library.member.list</field>
-    <field name="model">library.member</field>
-    <field name="arch" type="xml">
-        <list>
-            <field name="name" />
-            <field name="email" />
-            <field name="phone" />
-            <field name="borrow_count"/>
-        </list>
-    </field>
+        <field name="name">library.member.list</field>
+        <field name="model">library.member</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="borrow_count"/>
+            </list>
+        </field>
     </record>
 
+    <record id="view_library_member_search" model="ir.ui.view">
+        <field name="name">library.member.search</field>
+        <field name="model">library.member</field>
+        <field name="arch" type="xml">
+            <search>
+                <group>
+                    <filter name="name" string="Member" context="{'group_by':'name'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
     <!--  member model form action  -->
     <record id="action_library_member" model="ir.actions.act_window">
-    <field name="name">Member</field>
-    <field name="res_model">library.member</field>
-    <field name="view_mode">list,form</field>
+        <field name="name">Member</field>
+        <field name="res_model">library.member</field>
+        <field name="search_view_id" ref="view_library_member_search" />
+        <field name="view_mode">list,form,search</field>
     </record>
 
     <!--  menu for member model  -->
