@@ -12,13 +12,29 @@
                             type="object"
                             string="Return"
                             class="btn-primary"
-                            invisible="state == 'returned'"/>
+                            invisible="state != 'issued'"/>
+
+                    <button name="issue_button"
+                            type="object"
+                            string="Issue"
+                            class="btn-primary"
+                            invisible="state != 'draft'"/>
                 </header>
                 <sheet>
+                    <div class='oe_title'>  
+                        
+                        <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        </div>
+                    </div>
                     <group>
-                        <field name="name" readonly="state=='returned'"/>
+                        <field name="book_id"/>
+                        <field name="member_id"/>
+
                         <field name="borrow_date" readonly="state=='returned'"/>
-                        <field name="return_date" readonly="1"/>
+                        <field name="return_date"/>
                         <field name="actual_return_date" readonly="state=='returned'"/>
                         <field name="fine_amount" readonly="state=='returned'"/>
                         <field name="color" readonly="state=='returned'"/>
@@ -53,7 +69,7 @@
             <form>
                 <sheet>
                     <group>
-                        <field name="return_date"/>
+                        <field name="actual_return_date"/>
                         <field name="fine_amount"/>
                     </group>
                 </sheet>

@@ -18,3 +18,13 @@ class LibraryMember(models.Model):
     def compute_borrow_count(self):
         for record in self:
             record.borrow_count = self.env['library.borrow'].search_count([('member_id', '=', record.id)])
+
+        return{
+            'name' : 'Borrow Record',
+            'type' : 'ir.actions.act_window',
+            'res_model':'library.borrow',
+            'view_mode':'list,form',
+            'domain':[('member_id', '=', self.id)],
+
+        }
+

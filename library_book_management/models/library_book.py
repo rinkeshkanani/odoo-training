@@ -17,12 +17,13 @@ class BookModel(models.Model):
     #     ('unique_isbn', 'UNIQUE(isbn)', 'ISBN number should be unique!!!'),
     # ]
 
+    # unique sql constraint for isbn field
     _check_isbn = models.Constraint(
         'UNIQUE(isbn)',
         'ISBN number must be unique!!!.',
     )
 
-
+    #state change according to qty available
     @api.depends('available_qty')
     def _compute_state(self):
         for book in self:
