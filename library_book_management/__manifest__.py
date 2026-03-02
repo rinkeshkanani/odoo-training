@@ -25,6 +25,7 @@ Long description of module's purpose
         'views/library_model_view.xml',
         'views/library_member_view.xml',
         'views/library_borrow_view.xml',
+        'views/late_book.xml',
     ],
     'installable': True,
     'auto_install': False,

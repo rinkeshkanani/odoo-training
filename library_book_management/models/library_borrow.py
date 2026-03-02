@@ -1,6 +1,10 @@
+import logging
 from datetime import timedelta
+
 from odoo import api, models, fields
 from odoo.exceptions import ValidationError
+
+_logger = logging.getLogger(__name__)
 
 
 class BorrowModel(models.Model):
@@ -18,6 +22,34 @@ class BorrowModel(models.Model):
                              string='Status', default="draft")
     color = fields.Integer()
     fine_amount = fields.Float(compute='compute_fine_amount', string='Fine Amount', store=True)
+
+    # schedule ir.corn jobs
+    def check_late_books(self):
+        today = fields.Datetime.now()
+
+        _logger.info("====== CRON STARTED ======")
+        _logger.info(f"Today: {today}")
+
+        late_borrows = self.search([
+            ('state', '=', 'issued'),
+            ('return_date', '<', today),
+        ])
+
+        _logger.info(f"Found {len(late_borrows)} late records")
+
+        for record in late_borrows:
+            record.write({'state': 'late'})
+            _logger.info(f"Marked late: {record.name}")
+
+        _logger.info("====== CRON FINISHED ======")
+
+    # delete record
+    def delete_record(self):
+        for record in self:
+            if record.state == 'returned':
+                record.unlink()
+            else:
+                raise ValidationError("You can only delete Returned records!")
 
     # compute field for fine amount
     @api.depends('actual_return_date', 'return_date')
@@ -43,11 +75,10 @@ class BorrowModel(models.Model):
     @api.onchange("book_id", 'borrow_date')
     def change_data(self):
         for rec in self:
-            if rec.book_id.available_qty < 0:
-                raise ValidationError('Out of Stocks !!')
-            else:
+            if rec.book_id and rec.book_id.available_qty <= 0:
+                raise ValidationError("This book is out of stock!!!")
+            if rec.book_id:
                 rec.return_date = rec.borrow_date + timedelta(days=7)
-
 
     # action wizard to open
     def action_open_wizard(self):
@@ -63,17 +94,22 @@ class BorrowModel(models.Model):
             }
         }
 
-
     # issue button
     @api.depends('book_id')
     def issue_button(self):
         for rec in self:
             rec.state = 'issued'
+            if rec.state and rec.state == 'issued':
+                rec.message_post(
+                    body=(f"Book has been issued by {rec.member_id.name}!!!"),
+                )
             if rec.book_id.available_qty:
-                if rec.book_id.available_qty > 0:
-                    rec.book_id.available_qty -= 1
-                else:
+                if rec.book_id.available_qty <= 0:
+
                     raise ValidationError('Book is out of stock !!!!')
+
+                else:
+                    rec.book_id.available_qty -= 1
 
 
 class ReturnWizard(models.TransientModel):
@@ -85,6 +121,8 @@ class ReturnWizard(models.TransientModel):
 
     # wizard action
     def action_return(self):
+        print("\n context ----", self.env.context)
+        rec_model = self.env['library.borrow']
         active_model = self.env.context.get('active_model')
         active_id = self.env.context.get('active_id')
         record = self.env[active_model].browse(active_id)
@@ -96,7 +134,12 @@ class ReturnWizard(models.TransientModel):
             'actual_return_date': self.actual_return_date,
             'fine_amount': self.fine_amount,
             'state': 'returned',
-            # 'available_qty': self.book_ids.available_qty - 1,
-
         })
+
+        print("the write function",record.write())
+
+        record.message_post(
+            body=(f"The Book has been returned by {record.member_id.name}!!!"),
+            message_type='comment'
+        )
         return {'type': 'ir.actions.act_window_close'}

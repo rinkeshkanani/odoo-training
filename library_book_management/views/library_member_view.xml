@@ -18,6 +18,10 @@
                                 </span>
                             </div>
                         </button>
+                        <button name="action_open_reference_wizard"
+                                string="Add Reference"
+                                type="object"
+                                icon="fa-link"/>
                     </div>
                     <group>
                         <field name="name"/>
