@@ -1,5 +1,5 @@
 from odoo import models, fields, api
-
+from odoo.exceptions import ValidationError
 
 class BookModel(models.Model):
     _name = "library.book"
@@ -23,6 +23,8 @@ class BookModel(models.Model):
         'ISBN number must be unique!!!.',
     )
 
+
+
     #state change according to qty available
     @api.depends('available_qty')
     def _compute_state(self):
@@ -31,3 +33,11 @@ class BookModel(models.Model):
                 book.state = 'unavailable'
             else:
                 book.state = 'available'
+
+    @api.model_create_multi
+    def create(self,vals):
+        for rec in vals:
+            if rec.get('price') and rec['price'] <=0:
+                raise ValidationError("Price cannot be less than 0")
+        record = super().create(vals)
+        return record
