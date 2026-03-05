@@ -41,3 +41,8 @@ class BookModel(models.Model):
                 raise ValidationError("Price cannot be less than 0")
         record = super().create(vals)
         return record
+
+
+    def search_borrow(self):
+        rec = self.env['library.book'].search([('price', '>', 300.00)])
+        print(">>>>>>>>>>>>",rec)

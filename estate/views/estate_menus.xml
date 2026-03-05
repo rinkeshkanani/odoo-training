@@ -1,0 +1,9 @@
+<odoo>
+<menuitem id="estate_menu_root"
+    name="Estate"/>
+
+<menuitem id='estate_view'
+    parent='estate_menu_root'
+    action = 'action_real_estate'
+    sequence = '1'/>
+</odoo>

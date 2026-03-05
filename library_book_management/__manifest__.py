@@ -22,10 +22,14 @@ Long description of module's purpose
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'reports/library_borrow_report.xml',
+        'reports/library_borrow_report_template.xml',
         'views/library_model_view.xml',
         'views/library_member_view.xml',
         'views/library_borrow_view.xml',
-        'views/late_book.xml',
+        # 'data/late_book.xml',
+        'data/sequence_borrow.xml',
+
     ],
     'installable': True,
     'auto_install': False,

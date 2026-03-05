@@ -121,12 +121,10 @@ class ReturnWizard(models.TransientModel):
 
     # wizard action
     def action_return(self):
-        print("\n context ----", self.env.context)
-        rec_model = self.env['library.borrow']
         active_model = self.env.context.get('active_model')
         active_id = self.env.context.get('active_id')
         record = self.env[active_model].browse(active_id)
-
+        print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>', record)
         if record.book_id:
             record.book_id.available_qty += 1
         record.write({
@@ -135,8 +133,6 @@ class ReturnWizard(models.TransientModel):
             'fine_amount': self.fine_amount,
             'state': 'returned',
         })
-
-        print("the write function",record.write())
 
         record.message_post(
             body=(f"The Book has been returned by {record.member_id.name}!!!"),

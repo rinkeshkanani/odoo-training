@@ -39,7 +39,6 @@
                 <field name="name"/>
                 <field name="email"/>
                 <field name="phone"/>
-                <field name="borrow_count"/>
             </list>
         </field>
     </record>
@@ -56,6 +55,7 @@
             </search>
         </field>
     </record>
+
     <!--  member model action  -->
     <record id="action_library_member" model="ir.actions.act_window">
         <field name="name">Member</field>

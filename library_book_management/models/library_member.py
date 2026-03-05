@@ -22,6 +22,9 @@ class LibraryMember(models.Model):
             'type': 'ir.actions.act_window',
             'res_model': 'library.borrow',
             'view_mode': 'list,form',
-            'domain': [('member_id', '=', self.id)],
+            'domain': [('member_id', '=', record.id)],
 
         }
+
+
+

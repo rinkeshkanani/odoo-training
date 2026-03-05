@@ -38,6 +38,12 @@
         <field name="model">library.book</field>
         <field name="arch" type="xml">
             <list>
+                <header>
+                    <button string="Search Price"
+                            type="object"
+                            class="btn-primary"
+                            name="search_borrow"/>
+                </header>
                 <field name="name"/>
                 <field name="author"/>
                 <field name="isbn"/>
