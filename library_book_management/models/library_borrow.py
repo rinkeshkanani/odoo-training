@@ -38,10 +38,18 @@ class BorrowModel(models.Model):
         _logger.info(f"Found {len(late_borrows)} late records")
 
         for record in late_borrows:
-            record.write({'state': 'late'})
-            _logger.info(f"Marked late: {record.name}")
+            if record.state and record.state == 'returned':
+                record.state = 'late'
+            _logger.info(f"Marked late: {record.state}")
 
         _logger.info("====== CRON FINISHED ======")
+    @api.model
+    def check_late_manually(self):
+        print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+        for rec in self:
+            print(rec.state)
+            if rec.state and rec.state== 'returned':
+                rec.state = 'late'
 
     # delete record
     def delete_record(self):

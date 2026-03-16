@@ -27,7 +27,7 @@ Long description of module's purpose
         'views/library_model_view.xml',
         'views/library_member_view.xml',
         'views/library_borrow_view.xml',
-        # 'data/late_book.xml',
+        'data/late_book.xml',
         'data/sequence_borrow.xml',
 
     ],

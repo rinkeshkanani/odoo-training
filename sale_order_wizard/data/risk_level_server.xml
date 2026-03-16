@@ -1,0 +1,9 @@
+<odoo>
+    <record id="risk_level_server" model="ir.actions.server">
+        <field name="name">Risk Level</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="state">code</field>
+        <field name="code">records.risk_level_server()</field>
+    </record>
+</odoo>
