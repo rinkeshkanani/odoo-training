@@ -29,6 +29,7 @@ Long description of module's purpose
         'views/library_borrow_view.xml',
         'data/late_book.xml',
         'data/sequence_borrow.xml',
+        'data/email_book.xml',
 
     ],
     'installable': True,

@@ -133,7 +133,7 @@
 
 
     <record id="server_late_book_schedular" model="ir.actions.server">
-        <field name="name">Late Book Schedular</field>
+        <field name="name">Late Book Scheduler</field>
         <field name="model_id" ref="library_book_management.model_library_borrow"/>
         <field name="binding_model_id" ref="library_book_management.model_library_borrow"/>
         <field name="binding_view_types">list,form</field>
@@ -144,6 +144,14 @@
     </record>
 
 
+    <record id="email_late_book_server" model="ir.actions.server">
+        <field name="name">Late Book Email</field>
+        <field name="model_id" ref="library_book_management.model_library_borrow"/>
+        <field name="binding_model_id" ref="library_book_management.model_library_borrow"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="state">code</field>
+        <field name="code">records.late_email()</field>
+    </record>
     <!--  menu for borrow model -->
     <menuitem id="menu_library_borrow"
               name="Borrow"

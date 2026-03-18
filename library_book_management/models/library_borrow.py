@@ -38,17 +38,19 @@ class BorrowModel(models.Model):
         _logger.info(f"Found {len(late_borrows)} late records")
 
         for record in late_borrows:
-            if record.state and record.state == 'returned':
+            if record.state:
                 record.state = 'late'
+                record.late_email()
             _logger.info(f"Marked late: {record.state}")
 
         _logger.info("====== CRON FINISHED ======")
+
     @api.model
     def check_late_manually(self):
         print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
         for rec in self:
             print(rec.state)
-            if rec.state and rec.state== 'returned':
+            if rec.state and rec.state == 'returned':
                 rec.state = 'late'
 
     # delete record
@@ -118,6 +120,15 @@ class BorrowModel(models.Model):
 
                 else:
                     rec.book_id.available_qty -= 1
+
+    # email template
+    def late_email(self):
+        template = self.env.ref('library_book_management.email_late_book')
+        for record in self:
+            email_values = {
+                'email_to': record.member_id.email,
+            }
+            template.send_mail(record.id, force_send=True, email_values=email_values)
 
 
 class ReturnWizard(models.TransientModel):
