@@ -66,6 +66,18 @@ class SaleOrderCustom(models.Model):
                 else:
                     rec.risk_level = 'low'
 
+# task email on confirm sell order
+    def action_confirm(self):
+
+        template = self.env.ref('sale_order_wizard.email_confirm_sale_order')
+        for rec in self:
+            email_values={
+                'email_to': rec.partner_id.email,
+            }
+            template.send_mail(rec.id,force_send=True,email_values=email_values)
+        return super().action_confirm()
+
+
 
 class SaleOrderLineCustom(models.Model):
     _inherit = "sale.order.line"
@@ -75,5 +87,4 @@ class SaleOrderLineCustom(models.Model):
         for rec in self:
             if rec.product_uom_qty and rec.product_uom_qty > 50:
                 raise ValidationError("The product quantity must be less than 50!!!")
-
 

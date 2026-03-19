@@ -20,6 +20,7 @@
         'data/sale_schedule_view.xml',
         'data/sale_quotation_schedule_view.xml',
         'data/risk_level_server.xml',
+        'data/sale_order_confirm_email.xml',
     ],
     'license': 'LGPL-3',
     'installable': True,
