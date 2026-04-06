@@ -125,10 +125,10 @@ class BorrowModel(models.Model):
     def late_email(self):
         template = self.env.ref('library_book_management.email_late_book')
         for record in self:
-            email_values = {
-                'email_to': record.member_id.email,
-            }
-            template.send_mail(record.id, force_send=True, email_values=email_values)
+            # email_values = {
+            #     'email_to': record.member_id.email,
+            # }
+            template.send_mail(record.id, force_send=True)
 
 
 class ReturnWizard(models.TransientModel):

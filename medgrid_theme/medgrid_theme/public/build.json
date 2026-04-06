@@ -1,0 +1,8 @@
+{
+  "css/medgrid_theme.min.css": [
+    "css/medgrid_theme.css"
+  ],
+  "js/medgrid_theme.min.js": [
+    "js/medgrid_theme.js"
+  ]
+}

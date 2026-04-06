@@ -1,0 +1,726 @@
+/* ============================================================
+   MEDGRID HEALTHCARE NETWORK — Custom Frappe Theme
+   Version: 1.0.0
+   Colors:
+     Deep Navy    : #0D1B4B
+     Medium Blue  : #1A3A8F
+     Steel Blue   : #2A5298
+     Hover Blue   : #3D6BC4
+     Silver Grey  : #C0C8D8
+     Grid Dot     : #8A9BBF
+     Light Silver : #E8ECF4
+     Off White    : #F4F6FA
+     Dark Navy    : #0A1740
+     White        : #FFFFFF
+   ============================================================ */
+
+/* ── CSS Variables ────────────────────────────────────────── */
+:root {
+    --mg-navy:        #0D1B4B;
+    --mg-navy-dark:   #0A1740;
+    --mg-blue:        #1A3A8F;
+    --mg-blue-mid:    #2A5298;
+    --mg-blue-hover:  #3D6BC4;
+    --mg-silver:      #C0C8D8;
+    --mg-grid:        #8A9BBF;
+    --mg-light:       #E8ECF4;
+    --mg-offwhite:    #F4F6FA;
+    --mg-white:       #FFFFFF;
+
+    --primary-color:  #1A3A8F;
+    --sidebar-bg:     #0D1B4B;
+    --navbar-bg:      #0D1B4B;
+    --text-on-dark:   #FFFFFF;
+    --text-muted:     #C0C8D8;
+    --border-color:   #8A9BBF;
+    --hover-bg:       #1A3A8F;
+    --active-bg:      #2A5298;
+    --card-bg:        #FFFFFF;
+    --page-bg:        #F4F6FA;
+    --input-bg:       #FFFFFF;
+    --btn-primary:    #1A3A8F;
+    --btn-hover:      #0D1B4B;
+}
+
+/* ── Global Page Background ───────────────────────────────── */
+body,
+.layout-main,
+.page-container,
+.main-section {
+    background-color: var(--mg-offwhite) !important;
+}
+
+/* ── Hide Navbar & HR on Login Page ──────────────────────── */
+nav.navbar,
+.navbar,
+.navbar-default,
+header.navbar,
+.navbar-header,
+.web-footer,
+footer,
+.page-footer,
+hr,
+body > hr,
+.login-content hr,
+.for-login hr,
+.page-card ~ hr,
+div > hr {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    border: none !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* ── Navbar (Desk only — after login) ────────────────────── */
+.frappe-app .navbar,
+.desk .navbar,
+[data-page-route] .navbar {
+    display: flex !important;
+    background-color: var(--mg-navy) !important;
+    border-bottom: 2px solid var(--mg-blue) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+    min-height: 52px !important;
+    height: auto !important;
+    overflow: visible !important;
+}
+
+.navbar .navbar-brand,
+.navbar .navbar-brand:hover {
+    color: var(--mg-white) !important;
+    font-weight: 700 !important;
+    font-size: 18px !important;
+    letter-spacing: 1px !important;
+}
+
+.navbar .nav-link,
+.navbar .nav-item > a {
+    color: var(--mg-silver) !important;
+    font-size: 13px !important;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-item > a:hover {
+    color: var(--mg-white) !important;
+}
+
+/* Navbar icons */
+.navbar .navbar-nav .nav-item .avatar,
+.navbar .dropdown-toggle {
+    color: var(--mg-silver) !important;
+}
+
+/* Search bar in navbar */
+.navbar .form-control,
+.navbar input[type="text"] {
+    background-color: var(--mg-blue) !important;
+    border: 1px solid var(--mg-blue-mid) !important;
+    color: var(--mg-white) !important;
+    border-radius: 6px !important;
+}
+
+.navbar .form-control::placeholder {
+    color: var(--mg-silver) !important;
+}
+
+/* ── Sidebar ──────────────────────────────────────────────── */
+.layout-side-section,
+.desk-sidebar,
+.sidebar-menu,
+.standard-sidebar,
+aside.layout-side-section {
+    background-color: var(--mg-navy) !important;
+    border-right: 1px solid var(--mg-blue) !important;
+    min-height: 100vh !important;
+}
+
+.desk-sidebar .sidebar-item,
+.standard-sidebar-item,
+.sidebar-menu .sidebar-item {
+    color: var(--mg-silver) !important;
+    border-radius: 6px !important;
+    margin: 2px 6px !important;
+    padding: 8px 12px !important;
+    font-size: 13px !important;
+    transition: all 0.2s ease !important;
+}
+
+.desk-sidebar .sidebar-item:hover,
+.standard-sidebar-item:hover,
+.sidebar-menu .sidebar-item:hover {
+    background-color: var(--mg-blue) !important;
+    color: var(--mg-white) !important;
+}
+
+.desk-sidebar .sidebar-item.selected,
+.standard-sidebar-item.selected,
+.sidebar-menu .sidebar-item.active {
+    background-color: var(--mg-blue-mid) !important;
+    color: var(--mg-white) !important;
+    font-weight: 600 !important;
+    border-left: 3px solid var(--mg-silver) !important;
+}
+
+.sidebar-group-title,
+.desk-sidebar .sidebar-label {
+    color: var(--mg-grid) !important;
+    font-size: 11px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    padding: 12px 12px 4px !important;
+}
+
+/* ── Module Cards (Home Page) ─────────────────────────────── */
+.desk-shortcut,
+.module-card,
+.onboarding-step,
+.widget-group .widget {
+    background-color: var(--mg-white) !important;
+    border: 1px solid var(--mg-light) !important;
+    border-radius: 10px !important;
+    box-shadow: 0 2px 6px rgba(13, 27, 75, 0.08) !important;
+    transition: all 0.25s ease !important;
+}
+
+.desk-shortcut:hover,
+.module-card:hover,
+.widget-group .widget:hover {
+    border-color: var(--mg-blue) !important;
+    box-shadow: 0 4px 16px rgba(26, 58, 143, 0.18) !important;
+    transform: translateY(-2px) !important;
+}
+
+.desk-shortcut .module-title,
+.module-card .card-title,
+.widget .widget-title {
+    color: var(--mg-navy) !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+}
+
+.desk-shortcut .widget-icon,
+.module-card .card-icon {
+    color: var(--mg-blue) !important;
+}
+
+/* ── Buttons ──────────────────────────────────────────────── */
+.btn-primary {
+    background-color: var(--mg-blue) !important;
+    border-color: var(--mg-blue) !important;
+    color: var(--mg-white) !important;
+    border-radius: 6px !important;
+    font-weight: 500 !important;
+    padding: 6px 16px !important;
+    transition: all 0.2s ease !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: var(--mg-navy) !important;
+    border-color: var(--mg-navy) !important;
+    color: var(--mg-white) !important;
+}
+
+.btn-secondary,
+.btn-default {
+    background-color: var(--mg-white) !important;
+    border-color: var(--mg-silver) !important;
+    color: var(--mg-navy) !important;
+    border-radius: 6px !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease !important;
+}
+
+.btn-secondary:hover,
+.btn-default:hover {
+    background-color: var(--mg-light) !important;
+    border-color: var(--mg-blue) !important;
+    color: var(--mg-navy) !important;
+}
+
+.btn-danger {
+    background-color: #c0392b !important;
+    border-color: #c0392b !important;
+    color: var(--mg-white) !important;
+    border-radius: 6px !important;
+}
+
+.btn-success {
+    background-color: #27ae60 !important;
+    border-color: #27ae60 !important;
+    color: var(--mg-white) !important;
+    border-radius: 6px !important;
+}
+
+.page-actions .btn-primary,
+.form-save-btn {
+    background-color: var(--mg-blue) !important;
+    border-color: var(--mg-blue) !important;
+    min-width: 80px !important;
+}
+
+/* ── Form / DocType ───────────────────────────────────────── */
+.page-form,
+.form-page,
+.frappe-card {
+    background-color: var(--mg-white) !important;
+    border: 1px solid var(--mg-light) !important;
+    border-radius: 10px !important;
+    box-shadow: 0 2px 8px rgba(13, 27, 75, 0.06) !important;
+}
+
+.section-head,
+.form-section .section-head {
+    background-color: var(--mg-offwhite) !important;
+    color: var(--mg-navy) !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    border-bottom: 1px solid var(--mg-light) !important;
+    padding: 8px 12px !important;
+    border-radius: 6px 6px 0 0 !important;
+}
+
+.control-label,
+.form-control-label,
+label.control-label {
+    color: var(--mg-navy) !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+}
+
+/* Input fields */
+.form-control,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea,
+select {
+    border: 1px solid var(--mg-silver) !important;
+    border-radius: 6px !important;
+    background-color: var(--mg-white) !important;
+    color: var(--mg-navy) !important;
+    font-size: 13px !important;
+    transition: border-color 0.2s ease !important;
+}
+
+.form-control:focus,
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--mg-blue) !important;
+    box-shadow: 0 0 0 2px rgba(26, 58, 143, 0.15) !important;
+    outline: none !important;
+}
+
+/* Login page logo size */
+.page-card-head img {
+    max-height: 192px !important;
+    width: auto !important;
+    display: block !important;
+    margin: 0 auto !important;
+}
+
+.reqd .control-label::after {
+    color: #e74c3c !important;
+}
+
+/* ── Page Header ──────────────────────────────────────────── */
+.page-head,
+.page-header {
+    background-color: var(--mg-white) !important;
+    border-bottom: 1px solid var(--mg-light) !important;
+    padding: 10px 16px !important;
+}
+
+.page-title,
+.title-text,
+h1.title-text {
+    color: var(--mg-navy) !important;
+    font-weight: 700 !important;
+    font-size: 20px !important;
+}
+
+.breadcrumb,
+.page-head .breadcrumb {
+    background-color: transparent !important;
+}
+
+.breadcrumb-item a,
+.breadcrumb a {
+    color: var(--mg-blue) !important;
+}
+
+.breadcrumb-item.active {
+    color: var(--mg-navy) !important;
+}
+
+/* ── List View ────────────────────────────────────────────── */
+.list-row,
+.result-list .list-row {
+    background-color: var(--mg-white) !important;
+    border-bottom: 1px solid var(--mg-light) !important;
+    transition: background 0.15s ease !important;
+}
+
+.list-row:hover {
+    background-color: var(--mg-offwhite) !important;
+}
+
+.list-row.list-row-head {
+    background-color: var(--mg-light) !important;
+    color: var(--mg-navy) !important;
+    font-weight: 600 !important;
+    font-size: 12px !important;
+    border-bottom: 2px solid var(--mg-silver) !important;
+}
+
+.list-row.list-row-checked,
+.list-row.checked {
+    background-color: rgba(26, 58, 143, 0.06) !important;
+}
+
+/* ── Table ────────────────────────────────────────────────── */
+.table,
+table.table {
+    border-color: var(--mg-light) !important;
+}
+
+.table thead th {
+    background-color: var(--mg-navy) !important;
+    color: var(--mg-white) !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    border-color: var(--mg-blue) !important;
+    padding: 10px 12px !important;
+}
+
+.table tbody tr {
+    background-color: var(--mg-white) !important;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: var(--mg-offwhite) !important;
+}
+
+.table tbody tr:hover {
+    background-color: var(--mg-light) !important;
+}
+
+.table tbody td {
+    border-color: var(--mg-light) !important;
+    color: var(--mg-navy) !important;
+    font-size: 13px !important;
+    padding: 8px 12px !important;
+    vertical-align: middle !important;
+}
+
+/* ── Child Table ──────────────────────────────────────────── */
+.grid-heading-row .grid-row {
+    background-color: var(--mg-navy) !important;
+    color: var(--mg-white) !important;
+}
+
+.grid-row {
+    border-bottom: 1px solid var(--mg-light) !important;
+}
+
+.grid-row:hover {
+    background-color: var(--mg-light) !important;
+}
+
+/* ── Tabs ─────────────────────────────────────────────────── */
+.nav-tabs {
+    border-bottom: 2px solid var(--mg-light) !important;
+}
+
+.nav-tabs .nav-link {
+    color: var(--mg-grid) !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    border: none !important;
+    padding: 8px 16px !important;
+    border-radius: 0 !important;
+    transition: all 0.2s ease !important;
+}
+
+.nav-tabs .nav-link:hover {
+    color: var(--mg-navy) !important;
+    border-bottom: 2px solid var(--mg-silver) !important;
+}
+
+.nav-tabs .nav-link.active {
+    color: var(--mg-navy) !important;
+    font-weight: 600 !important;
+    border-bottom: 2px solid var(--mg-blue) !important;
+    background-color: transparent !important;
+}
+
+/* ── Badges / Status Indicators ──────────────────────────── */
+.indicator,
+.badge {
+    border-radius: 20px !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    padding: 3px 10px !important;
+}
+
+.indicator.green, .badge-success {
+    background-color: #e8f5e9 !important;
+    color: #2e7d32 !important;
+}
+
+.indicator.red, .badge-danger {
+    background-color: #ffebee !important;
+    color: #c62828 !important;
+}
+
+.indicator.orange, .badge-warning {
+    background-color: #fff3e0 !important;
+    color: #e65100 !important;
+}
+
+.indicator.blue, .badge-info {
+    background-color: #e3f2fd !important;
+    color: var(--mg-blue) !important;
+}
+
+.indicator.grey, .badge-secondary {
+    background-color: var(--mg-light) !important;
+    color: var(--mg-grid) !important;
+}
+
+/* ── Dropdown ─────────────────────────────────────────────── */
+.dropdown-menu {
+    border: 1px solid var(--mg-light) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 16px rgba(13, 27, 75, 0.12) !important;
+    background-color: var(--mg-white) !important;
+}
+
+.dropdown-item {
+    color: var(--mg-navy) !important;
+    font-size: 13px !important;
+    padding: 8px 16px !important;
+    transition: background 0.15s ease !important;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: var(--mg-offwhite) !important;
+    color: var(--mg-blue) !important;
+}
+
+/* ── Modal ────────────────────────────────────────────────── */
+.modal-content {
+    border: none !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 32px rgba(13, 27, 75, 0.2) !important;
+}
+
+.modal-header {
+    background-color: var(--mg-navy) !important;
+    color: var(--mg-white) !important;
+    border-radius: 12px 12px 0 0 !important;
+    border-bottom: none !important;
+    padding: 16px 20px !important;
+}
+
+.modal-title {
+    color: var(--mg-white) !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+
+.modal-header .close,
+.modal-header .btn-close {
+    color: var(--mg-silver) !important;
+    opacity: 1 !important;
+}
+
+.modal-body {
+    padding: 20px !important;
+    background-color: var(--mg-white) !important;
+}
+
+.modal-footer {
+    border-top: 1px solid var(--mg-light) !important;
+    background-color: var(--mg-offwhite) !important;
+    border-radius: 0 0 12px 12px !important;
+    padding: 12px 20px !important;
+}
+
+/* ── Alerts ───────────────────────────────────────────────── */
+.alert-success {
+    background-color: #e8f5e9 !important;
+    border-color: #a5d6a7 !important;
+    color: #2e7d32 !important;
+    border-radius: 8px !important;
+}
+
+.alert-danger,
+.alert-error {
+    background-color: #ffebee !important;
+    border-color: #ef9a9a !important;
+    color: #c62828 !important;
+    border-radius: 8px !important;
+}
+
+.alert-warning {
+    background-color: #fff3e0 !important;
+    border-color: #ffcc80 !important;
+    color: #e65100 !important;
+    border-radius: 8px !important;
+}
+
+.alert-info {
+    background-color: #e3f2fd !important;
+    border-color: #90caf9 !important;
+    color: var(--mg-blue) !important;
+    border-radius: 8px !important;
+}
+
+/* ── Dashboard / Charts ───────────────────────────────────── */
+.dashboard-chart,
+.chart-container {
+    background-color: var(--mg-white) !important;
+    border: 1px solid var(--mg-light) !important;
+    border-radius: 10px !important;
+    padding: 16px !important;
+    box-shadow: 0 2px 8px rgba(13, 27, 75, 0.06) !important;
+}
+
+/* ── Workspace ────────────────────────────────────────────── */
+.workspace-container {
+    background-color: var(--mg-offwhite) !important;
+}
+
+.workspace-section-title {
+    color: var(--mg-navy) !important;
+    font-weight: 700 !important;
+    font-size: 16px !important;
+    border-bottom: 2px solid var(--mg-blue) !important;
+    padding-bottom: 6px !important;
+    margin-bottom: 12px !important;
+}
+
+/* ── Scrollbar ────────────────────────────────────────────── */
+::-webkit-scrollbar {
+    width: 6px !important;
+    height: 6px !important;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--mg-offwhite) !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--mg-silver) !important;
+    border-radius: 3px !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--mg-blue) !important;
+}
+
+/* ── Links ────────────────────────────────────────────────── */
+a {
+    color: var(--mg-blue) !important;
+    transition: color 0.15s ease !important;
+}
+
+a:hover {
+    color: var(--mg-navy) !important;
+}
+
+/* ── Toolbar / Page Actions ───────────────────────────────── */
+.page-actions,
+.form-page-actions {
+    gap: 8px !important;
+}
+
+/* ── Search ───────────────────────────────────────────────── */
+.search-dialog .modal-header,
+.search-results .modal-header {
+    background-color: var(--mg-navy) !important;
+}
+
+.awesomplete input {
+    border-color: var(--mg-silver) !important;
+    border-radius: 6px !important;
+}
+
+.awesomplete ul {
+    border: 1px solid var(--mg-light) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 16px rgba(13, 27, 75, 0.12) !important;
+}
+
+.awesomplete li:hover,
+.awesomplete li[aria-selected="true"] {
+    background-color: var(--mg-light) !important;
+    color: var(--mg-navy) !important;
+}
+
+/* ── Notification Bell ────────────────────────────────────── */
+.notification-count {
+    background-color: #e74c3c !important;
+    color: var(--mg-white) !important;
+    border-radius: 50% !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+}
+
+/* ── Custom Medgrid Branding ──────────────────────────────── */
+.navbar-brand::before {
+    content: "MEDGRID";
+    font-family: sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    letter-spacing: 2px;
+    color: var(--mg-white);
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .layout-side-section,
+    .desk-sidebar {
+        background-color: var(--mg-navy) !important;
+    }
+
+    .navbar {
+        background-color: var(--mg-navy) !important;
+    }
+}
+/* Target the navbar brand/logo image */
+.navbar-brand img,
+.navbar-header .navbar-brand img {
+    width: 120px !important;  /* Change this value as needed */
+    height: auto !important;
+    max-height: 50px !important;
+}
+
+/* If it's an SVG logo */
+.navbar-brand svg {
+    width: 120px !important;
+    height: auto !important;
+}
+header.desktop-navbar {
+    padding-right: 0 !important;
+    box-sizing: border-box !important;
+}
+/* ── Hide brand logo image ───────────────────────────────── */
+#brand-logo {
+    display: none !important;
+}
+/* ── Fix scrollbar-gutter causing extra right space ─────── */
+html body .main-section {
+    scrollbar-gutter: auto !important;
+    overflow: unset !important;
+    overflow-x: unset !important;
+    overflow-y: unset !important;
+}

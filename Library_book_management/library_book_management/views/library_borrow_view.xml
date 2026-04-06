@@ -35,7 +35,6 @@
                     <group>
                         <field name="book_id"/>
                         <field name="member_id"/>
-
                         <field name="borrow_date" readonly="state=='returned'"/>
                         <field name="return_date" readonly="state=='returned'"/>
                         <field name="actual_return_date" readonly="state=='returned'"/>
@@ -105,7 +104,6 @@
                     <filter name="issued" string="Issued" domain="[('state','=','issued')]"/>
                     <filter name="returned" string="Returned" domain="[('state','=','returned')]"/>
                     <filter name="late" string="Late" domain="[('state','=','late')]"/>
-
                     <filter name="state" string="State" context="{'group_by':'state'}"/>
                 </group>
             </search>
@@ -152,6 +150,7 @@
         <field name="state">code</field>
         <field name="code">records.late_email()</field>
     </record>
+
     <!--  menu for borrow model -->
     <menuitem id="menu_library_borrow"
               name="Borrow"

@@ -69,5 +69,6 @@
               name="Members"
               parent="menu_library_book_root"
               action="action_library_member"
-              sequence="2"/>
+              sequence="2"
+              groups="group_library_group_manager"/>
 </odoo>

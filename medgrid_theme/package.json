@@ -1,0 +1,8 @@
+{
+  "name": "medgrid_theme",
+  "version": "1.0.0",
+  "description": "Medgrid Healthcare Network Theme",
+  "frappe": {
+    "app_name": "medgrid_theme"
+  }
+}
